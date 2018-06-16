@@ -13,11 +13,9 @@ from matplotlib.backends.backend_qt5agg import \
 from analysis.helper import *
 from analysis.ode_analysis import ODEAnalysis
 
-ENZYME_LIST = [E_PIP5K, E_PLC, E_DAGK, E_LAZA, E_PATP, E_CDS, E_PIS, E_PITP,
-               E_PI4K]
-
 LIGHT_STIMULATION = 85
 CARRY_FACTORS = ["x 1", "x 10", "x 0.1", "x 0.01"]
+PARAMETER_NO = 0
 
 
 def provide_condition(base):
@@ -159,7 +157,7 @@ class Window(QDialog):
         e_box.addStretch()
         e_box.addWidget(QLabel("Feedback to"))
         enz_box = QComboBox(self)
-        for e in ENZYME_LIST:
+        for e in ENZYME_NAMES:
             enz_box.addItem(e)
         enz_box.activated[str].connect(self.on_enzyme_selection)
         e_box.addWidget(enz_box)
@@ -181,8 +179,9 @@ class Window(QDialog):
         # instead of ax.hold(False)
         self.figure.clear()
 
-        enz = extract_enzyme_set("para.txt")
-        enz2 = extract_enzyme_set("para.txt")  # Required because ODEAnalysis
+        enz = extract_enzyme_set("para.txt", PARAMETER_NO)
+        enz2 = extract_enzyme_set("para.txt",
+                                  PARAMETER_NO)  # Required because ODEAnalysis
         # changes enzyme values
         base = ODEAnalysis(S_OPEN_2, 1, enz)
         feed = ODEAnalysis(S_OPEN_2, 1, enz2, self.feed_para)
@@ -287,8 +286,6 @@ class Window(QDialog):
 
 def interact():
     app = QApplication(sys.argv)
-
     main = Window()
     main.show()
-
     sys.exit(app.exec_())

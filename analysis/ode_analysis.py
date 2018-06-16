@@ -72,12 +72,15 @@ class ODEAnalysis:
             else:
                 self.enz[e].k = self.enz[e].k / plc_base
 
-    def initialize(self):
+    def attain_steady_state(self):
         it = np.linspace(0, 2000, 5000)
         self.steady_state = \
             odeint(get_equations(self.system), self.initial_condition,
                    it, args=(self.enz, None))[-1]
 
+    def initialize(self):
+        it = np.linspace(0, 2000, 5000)
+        self.attain_steady_state()
         if self.feed_para is not None:
             multi_factor = 1
             for key in self.feed_para:

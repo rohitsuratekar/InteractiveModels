@@ -42,3 +42,6 @@ COLORS_PRIMARY = ["#00a78f", "#db7c00", "#12a3b4", "#ff509e", "#5392ff",
                   "#00aa5e", "#b3901f", "#b07ce8"]
 
 LIPID_NAMES = [L_PMPI, L_PI4P, L_PIP2, L_DAG, L_PMPA, L_ERPA, L_CDPDAG, L_ERPI]
+
+ENZYME_NAMES = [E_PIP5K, E_PLC, E_DAGK, E_LAZA, E_PATP, E_CDS, E_PIS, E_PITP,
+                E_PI4K, E_SINK, E_SOURCE]
