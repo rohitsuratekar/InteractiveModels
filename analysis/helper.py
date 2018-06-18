@@ -1,5 +1,7 @@
 import json
 
+import numpy as np
+
 from constants.namespace import *
 from models.biology import Enzyme
 from models.systems import open2
@@ -36,6 +38,15 @@ def get_equations(system: str):
         return open2
     else:
         raise Exception("No such system found :%s" % system)
+
+
+def get_random_concentration(lipid_total):
+    initial_condition = []
+    all_ratios = np.random.uniform(0, 1, 8)
+    for i in range(8):
+        initial_condition.append(
+            all_ratios[i] * lipid_total / sum(all_ratios))
+    return initial_condition
 
 
 COLORS_PRIMARY = ["#00a78f", "#db7c00", "#12a3b4", "#ff509e", "#5392ff",
