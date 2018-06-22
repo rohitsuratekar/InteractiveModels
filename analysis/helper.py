@@ -4,7 +4,7 @@ import numpy as np
 
 from constants.namespace import *
 from models.biology import Enzyme
-from models.systems import open2
+from models.systems import open2, open2_with_pip2_reverse
 
 
 def extract_enzyme_set(filename: str, row: int = 0) -> dict:
@@ -36,6 +36,8 @@ def get_equations(system: str):
     """
     if system == S_OPEN_2:
         return open2
+    elif system == S_OPEN_2_PIP2_REV:
+        return open2_with_pip2_reverse
     else:
         raise Exception("No such system found :%s" % system)
 
@@ -55,4 +57,4 @@ COLORS_PRIMARY = ["#00a78f", "#db7c00", "#12a3b4", "#ff509e", "#5392ff",
 LIPID_NAMES = [L_PMPI, L_PI4P, L_PIP2, L_DAG, L_PMPA, L_ERPA, L_CDPDAG, L_ERPI]
 
 ENZYME_NAMES = [E_PIP5K, E_PLC, E_DAGK, E_LAZA, E_PATP, E_CDS, E_PIS, E_PITP,
-                E_PI4K, E_SINK, E_SOURCE]
+                E_PI4K, E_SINK, E_SOURCE, E_P5TASE]

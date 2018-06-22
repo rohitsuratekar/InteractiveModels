@@ -9,6 +9,7 @@ KINETIC_MICHAELIS_MENTEN = "michaelis_menten"
 
 # Systems
 S_OPEN_2 = "open2"
+S_OPEN_2_PIP2_REV = "open2_pip2_rev"
 
 # Feedback Type
 FEEDBACK_POSITIVE = 1

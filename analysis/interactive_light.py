@@ -18,6 +18,7 @@ CARRY_FACTORS = ["x 1", "x 10", "x 0.1", "x 0.01"]
 PARAMETER_NO = 2
 E_NONE = "None"
 MUTANT_DEPLETION = 0.1
+SYSTEM = S_OPEN_2
 
 
 def provide_condition(base):
@@ -226,8 +227,8 @@ class Window(QDialog):
         enz2 = extract_enzyme_set("para.txt",
                                   PARAMETER_NO)  # Required because ODEAnalysis
         # changes enzyme values
-        base = ODEAnalysis(S_OPEN_2, 1, enz)
-        feed = ODEAnalysis(S_OPEN_2, 1, enz2, self.feed_para)
+        base = ODEAnalysis(SYSTEM, 1, enz)
+        feed = ODEAnalysis(SYSTEM, 1, enz2, self.feed_para)
 
         provide_condition(base)
         provide_condition(feed)
@@ -251,7 +252,7 @@ class Window(QDialog):
 
         if self.mutant_enzyme != E_NONE:
             enz3 = extract_enzyme_set("para.txt", PARAMETER_NO)
-            mut = ODEAnalysis(S_OPEN_2, 1, enz3, self.feed_para)
+            mut = ODEAnalysis(SYSTEM, 1, enz3, self.feed_para)
             mut.enz[self.mutant_enzyme].v *= MUTANT_DEPLETION
             provide_condition(mut)
 

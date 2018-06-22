@@ -13,7 +13,8 @@ from analysis.ode_analysis import ODEAnalysis
 
 E_NONE = "None"
 MUTANT_DEPLETION = 0.1
-PARAMETER_NO = 1
+PARAMETER_NO = 2
+SYSTEM = S_OPEN_2
 
 
 class MySpinBox(QDoubleSpinBox):
@@ -53,7 +54,7 @@ class MutantWindow(QDialog):
         self.enz_box = None
 
         enz = extract_enzyme_set("para.txt", PARAMETER_NO)
-        self.base = ODEAnalysis(S_OPEN_2, 1, enz)
+        self.base = ODEAnalysis(SYSTEM, 1, enz)
         if PARAMETER_NO == 0:
             self.base.normalize_enzymes()
         self.base.attain_steady_state()
@@ -157,7 +158,7 @@ class MutantWindow(QDialog):
 
     def reset(self):
         enz = extract_enzyme_set("para.txt", PARAMETER_NO)
-        self.base = ODEAnalysis(S_OPEN_2, 1, enz)
+        self.base = ODEAnalysis(SYSTEM, 1, enz)
         if PARAMETER_NO == 0:
             self.base.normalize_enzymes()
         self.base.attain_steady_state()
@@ -266,14 +267,14 @@ class MutantWindow(QDialog):
 
         exp_observations = [1, 1, 1, 2.5]
 
-        vals1 = get_ratios(s, mt_rdga)
-        vals2 = get_ratios(s, mt_laza)
-        vals = vals1[0], vals1[1], vals2[0], vals2[1]
+        val1 = get_ratios(s, mt_rdga)
+        val2 = get_ratios(s, mt_laza)
+        vals = val1[0], val1[1], val2[0], val2[1]
 
         legends = ["DAG/PI\n(rdga3)", "PA/PI\n(rdga3)", "DAG/PI\n(laza22)",
                    "PA/PI\n(laza22)"]
-        ax.bar(ind, exp_observations, width, color='b', label="WT")
-        ax.bar(ind + width, vals, width, color='r', label="MT")
+        ax.bar(ind, exp_observations, width, color='#3c6df0', label="WT")
+        ax.bar(ind + width, vals, width, color='#fe6100', label="MT")
         ax.set_xticks(ind + width / 2)
         plt.axhline(1, linestyle="--")
         plt.axhline(2.5, linestyle="--")
