@@ -120,6 +120,20 @@ class ODEAnalysis:
         sim_ss[I_PIP2] = amount
         self.stimulated_concentrations = sim_ss
 
+    def scale_parameters_by(self, value: float):
+        for e in self.enz:
+            self.enz[e].v = value * self.enz[e].v
+
+    def stimulate_pi4k(self, depletion_percentage):
+        """
+        This is hypothetical scenario. Use only for testing purpose
+        """
+        sim_ss = [x for x in self.stimulated_concentrations]
+        amount = sim_ss[I_PI4P] * (100 - depletion_percentage) / 100
+        sim_ss[I_DAG] = sim_ss[I_DAG] + sim_ss[I_PI4P] - amount
+        sim_ss[I_PI4P] = amount
+        self.stimulated_concentrations = sim_ss
+
     def recover(self, time: int):
         self.recovery_time_array = np.linspace(0, time, time * 100)
         self.time_array = self.recovery_time_array

@@ -13,7 +13,7 @@ from analysis.ode_analysis import ODEAnalysis
 
 E_NONE = "None"
 MUTANT_DEPLETION = 0.1
-PARAMETER_NO = 2
+PARAMETER_NO = 0
 SYSTEM = S_OPEN_2
 
 
